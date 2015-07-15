@@ -25,7 +25,8 @@ const CONFIGURABLE_COMMANDS = {
 	monotype: true,
 	survivor: true,
 	happy: true,
-	buzz: true
+	buzz: true,
+	describe: true
 };
 
 const CONFIGURABLE_MODERATION_OPTIONS = {
@@ -58,7 +59,7 @@ exports.commands = {
 	credits: 'about',
 	about: function (arg, user, room) {
 		var text = (room === user || user.hasRank(room.id, '#')) ? '' : '/pm ' + user.id + ', ';
-		text += '**Pokémon Showdown Bot** by: Quinella, TalkTakesTime, and Morfent';
+		text += 'I\'m a bot! I was created by Quinella, TalkTakesTime, Morfent and ' + config.creator + '.';
 		this.say(room, text);
 	},
 	git: function (arg, user, room) {
@@ -70,9 +71,9 @@ exports.commands = {
 	guide: function (arg, user, room) {
 		var text = (room === user || user.hasRank(room.id, '#'))  ? '' : '/pm ' + user.id + ', ';
 		if (Config.botguide) {
-			text += 'A guide on how to use this bot can be found here: ' + Config.botguide;
+			text += 'A guide on how to use me can be found here: ' + config.botguide;
 		} else {
-			text += 'There is no guide for this bot. PM the owner with any questions.';
+			text += 'There\'s no guide for me right now. PM ' + config.creator + ' with any questions!';
 		}
 		this.say(room, text);
 	},
@@ -597,7 +598,23 @@ exports.commands = {
 
 		this.say(room, text);
 	},
-
+	describe: function(arg, by, room, con) {
+		if (!arg) {
+			return this.say(con, room, 'Who?');
+		}
+		if ((arg.substring(0,1) == '/' || arg.substring(0,1) == '!') && arg !== '!_!') {
+			return this.say(con, room, 'Don\'t make me do bad stuff!');
+		}
+		var words = require('./words.js');
+		var adjNum= Math.floor(Math.random() * words.adjectives.length);
+		var nounNum = Math.floor(Math.random() * words.nouns.length);
+		var article = 'a';
+		var letter = words.adjectives[adjNum].substring(0,1);
+		if (letter === 'a' || letter === 'e' || letter === 'i' || letter === 'o' || letter === 'u') {
+			article = 'an';
+		}
+		this.say(con, room, arg +' is ' + article + ' ' + words.adjectives[adjNum] + ' ' +words.nouns[nounNum] + '.');
+	},
 	/**
 	 * Room specific commands
 	 *
