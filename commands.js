@@ -598,23 +598,6 @@ exports.commands = {
 
 		this.say(room, text);
 	},
-	describe: function(arg, by, room, con) {
-		if (!arg) {
-			return this.say(con, room, 'Who?');
-		}
-		if ((arg.substring(0,1) == '/' || arg.substring(0,1) == '!') && arg !== '!_!') {
-			return this.say(con, room, 'Don\'t make me do bad stuff!');
-		}
-		var words = require('./words.js');
-		var adjNum= Math.floor(Math.random() * words.adjectives.length);
-		var nounNum = Math.floor(Math.random() * words.nouns.length);
-		var article = 'a';
-		var letter = words.adjectives[adjNum].substring(0,1);
-		if (letter === 'a' || letter === 'e' || letter === 'i' || letter === 'o' || letter === 'u') {
-			article = 'an';
-		}
-		this.say(con, room, arg +' is ' + article + ' ' + words.adjectives[adjNum] + ' ' +words.nouns[nounNum] + '.');
-	},
 	/**
 	 * Room specific commands
 	 *
