@@ -59,7 +59,7 @@ exports.commands = {
 	credits: 'about',
 	about: function (arg, user, room) {
 		var text = (room === user || user.hasRank(room.id, '#')) ? '' : '/pm ' + user.id + ', ';
-		text += 'I\'m a bot! I was created by Quinella, TalkTakesTime, Morfent and ' + config.creator + '.';
+		text += 'I\'m a bot! I was created by Quinella, TalkTakesTime, Morfent and ' + Config.creator + '.';
 		this.say(room, text);
 	},
 	git: function (arg, user, room) {
@@ -71,9 +71,9 @@ exports.commands = {
 	guide: function (arg, user, room) {
 		var text = (room === user || user.hasRank(room.id, '#'))  ? '' : '/pm ' + user.id + ', ';
 		if (Config.botguide) {
-			text += 'A guide on how to use me can be found here: ' + config.botguide;
+			text += 'A guide on how to use me can be found here: ' + Config.botguide;
 		} else {
-			text += 'There\'s no guide for me right now. PM ' + config.creator + ' with any questions!';
+			text += 'There\'s no guide for me right now. PM ' + Config.creator + ' with any questions!';
 		}
 		this.say(room, text);
 	},
